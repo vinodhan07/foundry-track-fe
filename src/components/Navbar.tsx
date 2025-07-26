@@ -1,10 +1,12 @@
 import React from 'react';
 import { useAuth } from '../contexts/AuthContext';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { LogOut, Settings, User } from 'lucide-react';
 
 export function Navbar() {
   const { user, logout } = useAuth();
+  const navigate = useNavigate();
 
   return (
     <nav className="bg-card border-b border-border shadow-sm">
@@ -17,10 +19,15 @@ export function Navbar() {
           </div>
           
           <div className="flex items-center space-x-4">
-            <div className="flex items-center space-x-2 text-sm">
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              onClick={() => navigate('/profile')}
+              className="flex items-center space-x-2 text-sm hover:bg-accent"
+            >
               <User className="h-4 w-4 text-muted-foreground" />
               <span className="text-foreground">{user?.name}</span>
-            </div>
+            </Button>
             
             <Button variant="ghost" size="sm">
               <Settings className="h-4 w-4" />
